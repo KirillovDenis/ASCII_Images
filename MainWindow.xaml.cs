@@ -17,6 +17,7 @@ namespace ASCII_Images
     {
       string path="";
       OpenFileDialog OPF = new OpenFileDialog();
+      OPF.Filter = "Файлы png and jpg|*.png;*.jpg";
       if (OPF.ShowDialog() == true)
       {
         path = OPF.FileName;
