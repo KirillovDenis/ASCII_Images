@@ -64,14 +64,7 @@ namespace ASCII_Images
             {
               for (int l = 0; l < wblock; ++l)
               {
-                if (k == hblock / 2 && l == wblock / 2)
-                {
                   sum += buffer[i * hblock * width + k * width + j * wblock + l];
-                }
-                else
-                {
-                  sum += buffer[i * hblock * width + k * width + j * wblock + l];
-                }
               }
             }
             sum /= hblock * wblock;
