@@ -9,8 +9,11 @@
     <Grid>
         <ScrollViewer>
             <StackPanel>
-                <Button Content="Choose image" Click="ChooseImage_Click" Height="25" Width="80" HorizontalAlignment="Left"/>
-                <TextBlock x:Name="tmpBlock" FontSize="3"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Choose image" Click="ChooseImage_Click" Height="25" Width="80" HorizontalAlignment="Left"/>
+                <Button Content="Save" Click="SaveImage_Click" Height="25" Width="80" Margin="10,0,0,0"/>
+                </StackPanel>
+            <TextBlock x:Name="tmpBlock" FontSize="3"/>
             </StackPanel>
         </ScrollViewer>
     </Grid>

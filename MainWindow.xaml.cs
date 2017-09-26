@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
+using System.IO;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using System.Collections.Generic;
 
 namespace ASCII_Images
 {
@@ -15,14 +17,14 @@ namespace ASCII_Images
 
     private void ChooseImage_Click(object sender, RoutedEventArgs e)
     {
-      string path="";
+      string path = "";
       OpenFileDialog OPF = new OpenFileDialog();
       OPF.Filter = "Файлы png and jpg|*.png;*.jpg";
       if (OPF.ShowDialog() == true)
       {
         path = OPF.FileName;
       }
-      
+
       if (path != string.Empty)
       {
         BitmapImage bmi = new BitmapImage(new Uri(path));
@@ -33,8 +35,8 @@ namespace ASCII_Images
         var bufferSize = height * width;
         var buffer = new byte[bufferSize];
         grayscaleBitmap.CopyPixels(buffer, width, 0);
-        
-       
+
+
         int heightRes;
         int widthRes;
         if (height < 100 || width < 100)
@@ -54,7 +56,7 @@ namespace ASCII_Images
 
         string res = "";
         double sum;
-        
+
 
         for (int i = 0; i < heightRes; ++i)
         {
@@ -65,7 +67,7 @@ namespace ASCII_Images
             {
               for (int l = 0; l < wblock; ++l)
               {
-                  sum += buffer[i * hblock * width + k * width + j * wblock + l];
+                sum += buffer[i * hblock * width + k * width + j * wblock + l];
               }
             }
             sum /= hblock * wblock;
@@ -90,6 +92,28 @@ namespace ASCII_Images
         }
 
         tmpBlock.Text = res;
+      }
+    }
+
+    private void SaveImage_Click(object sender, RoutedEventArgs e)
+    {
+      string path = "";
+      string ans = tmpBlock.Text;
+      List<string> imageInLines = new List<string>(ans.Split('\n'));
+      if (ans != "")
+      {
+        SaveFileDialog SFD = new SaveFileDialog();
+        SFD.Filter = "Файлы txt|*.txt";
+        if (SFD.ShowDialog() == true)
+        {
+          path = SFD.FileName;
+        }
+        StreamWriter sw = new StreamWriter(path);
+        for (int i = 0; i < imageInLines.Count; ++i)
+        {
+          sw.WriteLine(imageInLines[i]);
+        }
+        sw.Close();
       }
     }
   }
